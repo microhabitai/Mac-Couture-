@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Mac Couture — Tanzanian luxury fashion brand. Timeless, stylish pieces for the modern woman."/>
+<title>Mac Couture | Crafted for Confidence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET & TOKENS ─────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#0B6B3A;--green2:#0D7D44;--green3:#1A9A55;
+  --gold:#C8A96E;--black:#000;--card:#0B140D;
+  --cream:#F5F0E8;--muted:rgba(245,240,232,.55);
+  --border:rgba(255,255,255,.07);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--black);color:var(--cream);font-family:'Inter',sans-serif;overflow-x:hidden;padding-bottom:72px}
+img{display:block;width:100%;height:100%;object-fit:cover}
+button{font-family:'Inter',sans-serif;cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────── */
+.serif{font-family:'Cormorant Garamond',serif}
+.slabel{font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--green)}
+.accent-bar{width:36px;height:2px;background:var(--green);margin:14px 0 20px}
+.accent-bar.center{margin-left:auto;margin-right:auto}
+
+/* ─── ANIMATIONS ─────────────────────────────────────── */
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.fade-up{animation:fadeUp .9s ease both}
+.d1{animation-delay:.15s}.d2{animation-delay:.35s}
+.d3{animation-delay:.55s}.d4{animation-delay:.75s}
+
+.marquee-track{animation:marquee 26s linear infinite;white-space:nowrap;display:flex}
+
+/* ─── HOVER EFFECTS ──────────────────────────────────── */
+.zoom-wrap{overflow:hidden}
+.zoom-wrap img{transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
+.zoom-wrap:hover img{transform:scale(1.07)}
+.lift{transition:transform .35s ease,box-shadow .35s ease}
+.lift:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(11,107,58,.18)}
+
+/* ─── BUTTONS ────────────────────────────────────────── */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--green);color:#fff;border:none;
+  padding:15px 32px;font-size:11px;font-weight:600;
+  letter-spacing:2.5px;text-transform:uppercase;
+  transition:background .3s ease;
+}
+.btn-primary:hover{background:var(--green3)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--cream);
+  border:1px solid rgba(245,240,232,.25);
+  padding:11px 22px;font-size:10px;font-weight:500;
+  letter-spacing:2px;text-transform:uppercase;
+  transition:border-color .3s ease,color .3s ease;
+}
+.btn-outline:hover{border-color:var(--green);color:var(--green3)}
+.btn-ghost{background:none;border:none;color:var(--cream);padding:4px;display:flex;align-items:center}
+
+/* ─── ANNOUNCEMENT BAR ───────────────────────────────── */
+#announce{background:var(--green);padding:10px 0;overflow:hidden}
+#announce span{
+  display:inline-flex;align-items:center;gap:48px;padding-right:48px;
+  font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#fff
+}
+
+/* ─── HEADER ─────────────────────────────────────────── */
+#header{
+  position:sticky;top:0;z-index:60;
+  background:#000;height:64px;padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  transition:box-shadow .3s ease;
+}
+#header.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.8)}
+.logo-mac{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;letter-spacing:7px;line-height:1}
+.logo-couture{font-size:9px;font-weight:600;letter-spacing:7px;color:var(--green);margin-top:-1px}
+.logo-wrap{text-align:center}
+.header-icons{display:flex;gap:18px;align-items:center}
+.cart-wrap{position:relative}
+.cart-badge{
+  position:absolute;top:-5px;right:-5px;
+  background:var(--green);color:#fff;
+  font-size:9px;font-weight:700;
+  width:17px;height:17px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.cart-badge.hidden{display:none}
+
+/* ─── MOBILE MENU ────────────────────────────────────── */
+#mmenu{
+  position:fixed;inset:0;background:#000;z-index:200;
+  transform:translateX(-100%);
+  transition:transform .45s cubic-bezier(.77,0,.175,1);
+  overflow-y:auto;
+}
+#mmenu.open{transform:translateX(0)}
+#mmenu .inner{padding:24px 24px 40px}
+.mmenu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:52px}
+.mmenu-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:5px}
+.mmenu-link{
+  padding:16px 0;border-bottom:1px solid rgba(255,255,255,.05);
+  font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;
+  letter-spacing:.5px;cursor:pointer;
+  transition:color .2s ease;display:block;
+}
+.mmenu-link:hover{color:var(--green)}
+.mmenu-socials{display:flex;gap:20px;margin-top:40px}
+.mmenu-contact{display:flex;align-items:center;gap:10px;color:rgba(245,240,232,.55);font-size:12px;margin-top:20px}
+
+/* ─── HERO ───────────────────────────────────────────── */
+#hero{position:relative;height:88vh;min-height:560px;overflow:hidden}
+.hero-slide{
+  position:absolute;inset:0;width:100%;height:100%;
+  opacity:0;transition:opacity 1.2s ease;
+}
+.hero-slide.active{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-overlay1{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.88) 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,.1) 100%)}
+.hero-overlay2{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%)}
+.hero-content{position:absolute;left:24px;right:50%;bottom:72px}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,11vw,68px);font-weight:300;line-height:1.05;letter-spacing:-.5px;margin-bottom:0}
+.hero-title em{color:var(--green);font-style:italic;font-weight:400}
+.hero-desc{font-size:13px;line-height:1.75;color:rgba(245,240,232,.75);margin-bottom:28px;max-width:280px}
+.hero-dots{position:absolute;bottom:28px;left:24px;display:flex;gap:8px;align-items:center}
+.hdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;border:none;transition:background .3s ease,width .3s ease}
+.hdot.active{background:var(--green);width:20px;border-radius:3px}
+.hero-arrows{position:absolute;bottom:18px;right:20px;display:flex;gap:8px}
+.hero-arrow{
+  background:rgba(255,255,255,.1);border:none;color:#fff;
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .2s ease;backdrop-filter:blur(4px);
+}
+.hero-arrow:hover{background:rgba(11,107,58,.5)}
+
+/* ─── TRUST STRIP ────────────────────────────────────── */
+#trust{padding:0 16px;border-bottom:1px solid var(--border)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06)}
+.trust-card{
+  background:#000;border:1px solid var(--border);
+  padding:22px 10px 18px;text-align:center;
+  transition:border-color .3s ease,background .3s ease;
+}
+.trust-card:hover{border-color:rgba(11,107,58,.4);background:rgba(11,107,58,.05)}
+.trust-icon{color:var(--green);margin-bottom:10px;display:flex;justify-content:center}
+.trust-label{font-size:8.5px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;color:rgba(245,240,232,.65);line-height:1.5}
+
+/* ─── COLLECTIONS ────────────────────────────────────── */
+#collections{padding:64px 20px 48px}
+.section-head{text-align:center;margin-bottom:32px}
+.section-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,9vw,52px);font-weight:300;margin-top:8px;letter-spacing:-.3px}
+.coll-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.coll-card{position:relative;aspect-ratio:3/4;cursor:pointer;overflow:hidden;background:var(--card)}
+.coll-card img{width:100%;height:100%;object-fit:cover;opacity:.78;transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
+.coll-card:hover img{transform:scale(1.07)}
+.coll-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,0) 55%)}
+.coll-label{position:absolute;bottom:16px;left:16px}
+.coll-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin-bottom:6px;letter-spacing:.3px}
+.coll-sub{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:4px}
+
+/* ─── PRODUCTS ───────────────────────────────────────── */
+#products{padding:0 20px 64px}
+.products-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px}
+.products-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,7vw,40px);font-weight:300;margin-top:6px}
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pcard{position:relative;background:var(--card);cursor:pointer;overflow:hidden}
+.ptag{position:absolute;top:12px;left:12px;background:var(--green);color:#fff;font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 9px;z-index:2}
+.pwish{
+  position:absolute;top:12px;right:12px;background:rgba(0,0,0,.55);
+  border:none;border-radius:50%;width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;opacity:0;transition:opacity .3s ease;z-index:2;
+}
+.pcard:hover .pwish{opacity:1}
+.pwish.active svg path{fill:var(--green);stroke:var(--green)}
+.pimg{aspect-ratio:3/4;overflow:hidden}
+.pimg img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.25,.46,.45,.94)}
+.pcard:hover .pimg img{transform:scale(1.07)}
+.qadd{
+  position:absolute;bottom:0;left:0;right:0;
+  background:var(--green);color:#fff;text-align:center;
+  padding:13px;font-size:10px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  transform:translateY(100%);transition:transform .32s cubic-bezier(.25,.46,.45,.94);
+}
+.pcard:hover .qadd{transform:translateY(0)}
+.pinfo{padding:12px 12px 14px}
+.pname{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;margin-bottom:4px}
+.pprice{font-size:12px;color:var(--gold);font-weight:500}
+
+/* ─── BRAND STORY ────────────────────────────────────── */
+#story{background:var(--card);padding:64px 0 0}
+.story-img{aspect-ratio:16/9;overflow:hidden}
+.story-body{padding:44px 24px 56px}
+.story-body h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,8vw,46px);font-weight:300;line-height:1.15;letter-spacing:-.3px}
+.story-body h2 em{color:var(--green);font-style:italic}
+.story-body p{font-size:14px;line-height:1.85;color:rgba(245,240,232,.7);margin-bottom:16px}
+
+/* ─── TESTIMONIALS ───────────────────────────────────── */
+#testimonials{padding:64px 0 56px}
+.test-head{text-align:center;margin-bottom:32px;padding:0 20px}
+.test-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,8vw,46px);font-weight:300;margin-top:8px}
+.tcard{background:var(--card);border:1px solid rgba(11,107,58,.2);padding:28px 24px;min-height:200px;margin:0 20px;transition:opacity .4s ease}
+.tstars{display:flex;gap:2px;margin-bottom:16px}
+.ttext{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;line-height:1.7;color:rgba(245,240,232,.88);font-style:italic;margin-bottom:22px}
+.tname{font-size:13px;font-weight:500;margin-bottom:2px}
+.tloc{font-size:10px;color:var(--green);letter-spacing:1px;text-transform:uppercase}
+.tdots{display:flex;gap:8px;margin-top:20px;justify-content:center;align-items:center}
+.tdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;border:none;transition:background .3s ease,width .3s ease}
+.tdot.active{background:var(--green);width:20px;border-radius:3px}
+.tarrows{display:flex;justify-content:center;gap:12px;margin-top:16px}
+.tarrow{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s ease}
+.tarrow:hover{border-color:var(--green)}
+
+/* ─── NEWSLETTER ─────────────────────────────────────── */
+#newsletter{background:var(--green);padding:56px 24px;text-align:center}
+.nl-icon{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;background:rgba(0,0,0,.2);border-radius:50%;margin-bottom:16px}
+#newsletter h2{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,7vw,42px);font-weight:300;line-height:1.2;margin-bottom:8px}
+#newsletter p{font-size:13px;color:rgba(255,255,255,.78);margin-bottom:28px;line-height:1.6}
+.nl-form{display:flex;max-width:400px;margin:0 auto}
+.nl-input{flex:1;padding:14px 16px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.3);border-right:none;color:#fff;font-family:'Inter',sans-serif;font-size:13px;outline:none}
+.nl-input::placeholder{color:rgba(255,255,255,.45)}
+.nl-input:focus{border-color:rgba(255,255,255,.6)}
+.nl-btn{background:#000;color:#fff;border:none;padding:14px 20px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:background .3s}
+.nl-btn:hover{background:#111}
+.nl-success{background:rgba(0,0,0,.2);padding:16px 24px;display:inline-flex;align-items:center;gap:10px;font-size:13px;color:#fff}
+.nl-success.hidden{display:none}
+.nl-form.hidden{display:none}
+
+/* ─── FOOTER ─────────────────────────────────────────── */
+footer{background:#000;padding:52px 24px 108px;border-top:1px solid var(--border)}
+.foot-logo{text-align:center;margin-bottom:44px}
+.foot-mac{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;letter-spacing:8px}
+.foot-couture{font-size:9px;font-weight:600;letter-spacing:8px;color:var(--green);margin-top:-2px}
+.foot-tagline{font-size:12px;color:rgba(245,240,232,.4);margin-top:12px;line-height:1.6;max-width:240px;margin-left:auto;margin-right:auto}
+.foot-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:40px}
+.foot-col h4{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:16px}
+.foot-link{font-size:13px;color:rgba(245,240,232,.5);margin-bottom:10px;cursor:pointer;transition:color .2s;display:block}
+.foot-link:hover{color:var(--cream)}
+.foot-divider{border-top:1px solid var(--border);padding-top:28px;margin-bottom:24px}
+.foot-contact{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:12px;color:rgba(245,240,232,.5)}
+.foot-contact svg{flex-shrink:0}
+.foot-socials{display:flex;justify-content:center;gap:20px;margin-bottom:16px}
+.foot-social{color:var(--green);cursor:pointer;transition:color .2s}
+.foot-social:hover{color:var(--green3)}
+.foot-copy{text-align:center;font-size:10px;color:rgba(245,240,232,.25);letter-spacing:.5px}
+
+/* ─── WHATSAPP FAB ───────────────────────────────────── */
+#wa-fab{
+  position:fixed;bottom:82px;right:18px;
+  width:52px;height:52px;border-radius:50%;
+  background:#25D366;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:79;
+  box-shadow:0 4px 20px rgba(37,211,102,.45);
+  transition:transform .3s ease;
+}
+#wa-fab:hover{transform:scale(1.1)}
+
+/* ─── BOTTOM NAV ─────────────────────────────────────── */
+#bnav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(0,0,0,.97);border-top:1px solid var(--border);
+  z-index:80;padding:8px 0 12px;backdrop-filter:blur(12px);
+}
+.bnav-inner{display:grid;grid-template-columns:repeat(5,1fr);max-width:420px;margin:0 auto}
+.bnav-btn{
+  background:none;border:none;display:flex;flex-direction:column;
+  align-items:center;gap:4px;color:rgba(245,240,232,.35);
+  font-size:8px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;
+  padding:4px 0;transition:color .2s ease;
+}
+.bnav-btn.active{color:var(--green)}
+
+/* ─── SVG ICON HELPERS ───────────────────────────────── */
+.icon{display:inline-flex;flex-shrink:0}
+svg{display:block}
+
+/* ─── RESPONSIVE TWEAKS ──────────────────────────────── */
+@media(max-width:380px){
+  .hero-content{right:24px}
+  .hero-title{font-size:40px}
+}
+@media(min-width:640px){
+  .btn-primary{padding:17px 40px}
+  .hero-content{right:45%}
+}
+@media(min-width:768px){
+  .coll-grid{grid-template-columns:repeat(4,1fr)}
+  .prod-grid{grid-template-columns:repeat(4,1fr)}
+  body{padding-bottom:0}
+  #bnav{display:none}
+  #wa-fab{bottom:28px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── MOBILE MENU ───────────────────────────────────── -->
+<div id="mmenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="inner">
+    <div class="mmenu-header">
+      <span class="mmenu-logo">MAC COUTURE</span>
+      <button class="btn-ghost" onclick="closeMenu()" aria-label="Close menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav>
+      <a href="#" class="mmenu-link" onclick="closeMenu()">New Arrivals</a>
+      <a href="#collections" class="mmenu-link" onclick="closeMenu()">Dresses</a>
+      <a href="#collections" class="mmenu-link" onclick="closeMenu()">Tops</a>
+      <a href="#collections" class="mmenu-link" onclick="closeMenu()">Sets</a>
+      <a href="#collections" class="mmenu-link" onclick="closeMenu()">Collections</a>
+      <a href="#story" class="mmenu-link" onclick="closeMenu()">About</a>
+      <a href="#footer" class="mmenu-link" onclick="closeMenu()">Contact</a>
+    </nav>
+    <div class="mmenu-socials">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B6B3A" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B6B3A" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </div>
+    <div class="mmenu-contact">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      +255 700 000 000
+    </div>
+  </div>
+</div>
+
+<!-- ── ANNOUNCEMENT BAR ──────────────────────────────── -->
+<div id="announce" aria-label="Promotions">
+  <div class="marquee-track" aria-hidden="true">
+    <span>🚚 Free Delivery in Tanzania for Orders Above TZS 200,000 <span style="opacity:.5">✦</span> New Collection Now Live <span style="opacity:.5">✦</span> Use Code MAC10 for 10% Off Your First Order <span style="opacity:.5">✦</span></span>
+    <span>🚚 Free Delivery in Tanzania for Orders Above TZS 200,000 <span style="opacity:.5">✦</span> New Collection Now Live <span style="opacity:.5">✦</span> Use Code MAC10 for 10% Off Your First Order <span style="opacity:.5">✦</span></span>
+  </div>
+</div>
+
+<!-- ── HEADER ────────────────────────────────────────── -->
+<header id="header">
+  <button class="btn-ghost" onclick="openMenu()" aria-label="Open menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <div class="logo-wrap">
+    <div class="logo-mac">MAC</div>
+    <div class="logo-couture">COUTURE</div>
+  </div>
+  <div class="header-icons">
+    <button class="btn-ghost" aria-label="Search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+    <button class="btn-ghost cart-wrap" aria-label="Shopping bag" onclick="showCartMsg()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span id="cart-badge" class="cart-badge hidden">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ── HERO ──────────────────────────────────────────── -->
+<section id="hero" aria-label="Hero">
+  <!-- Slide 1 -->
+  <div class="hero-slide active">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=85&fit=crop" alt="Crafted for Confidence" loading="eager"/>
+  </div>
+  <!-- Slide 2 -->
+  <div class="hero-slide">
+    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&q=85&fit=crop" alt="Draped in Elegance" loading="lazy"/>
+  </div>
+  <!-- Slide 3 -->
+  <div class="hero-slide">
+    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=85&fit=crop" alt="Dress for Every Chapter" loading="lazy"/>
+  </div>
+
+  <div class="hero-overlay1"></div>
+  <div class="hero-overlay2"></div>
+
+  <!-- Content -->
+  <div class="hero-content" id="hero-content">
+    <p class="slabel fade-up d1" id="hero-label">Timeless Style</p>
+    <h1 class="hero-title fade-up d2">
+      <span id="hero-line1">Crafted for</span><br/>
+      <em id="hero-line2">Confidence</em>
+    </h1>
+    <div class="accent-bar fade-up d2"></div>
+    <p class="hero-desc fade-up d3">A Tanzanian fashion brand creating clean, stylish and timeless pieces for the modern woman.</p>
+    <button class="btn-primary fade-up d4" onclick="scrollTo('#collections')">
+      SHOP COLLECTION
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+
+  <!-- Dots -->
+  <div class="hero-dots" role="tablist" aria-label="Slide navigation">
+    <button class="hdot active" onclick="goSlide(0)" role="tab" aria-selected="true" aria-label="Slide 1"></button>
+    <button class="hdot" onclick="goSlide(1)" role="tab" aria-selected="false" aria-label="Slide 2"></button>
+    <button class="hdot" onclick="goSlide(2)" role="tab" aria-selected="false" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Arrows -->
+  <div class="hero-arrows">
+    <button class="hero-arrow" onclick="prevSlide()" aria-label="Previous slide">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="hero-arrow" onclick="nextSlide()" aria-label="Next slide">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ── TRUST STRIP ────────────────────────────────────── -->
+<section id="trust" aria-label="Brand promises">
+  <div class="trust-grid">
+    <div class="trust-card">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+      </div>
+      <p class="trust-label">Quality<br/>Fabrics</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <p class="trust-label">Exclusive<br/>Designs</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <p class="trust-label">Secure<br/>Payment</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      </div>
+      <p class="trust-label">Customer<br/>Support</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── COLLECTIONS ────────────────────────────────────── -->
+<section id="collections">
+  <div class="section-head">
+    <p class="slabel">Explore Our</p>
+    <h2 class="serif">Collections</h2>
+    <div class="accent-bar center"></div>
+  </div>
+  <div class="coll-grid">
+    <div class="coll-card lift">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80&fit=crop" alt="Dresses collection" loading="lazy"/>
+      <div class="coll-overlay"></div>
+      <div class="coll-label">
+        <p class="coll-name">Dresses</p>
+        <p class="coll-sub">SHOP NOW <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></p>
+      </div>
+    </div>
+    <div class="coll-card lift">
+      <img src="https://images.unsplash.com/photo-1594938298603-c8148e4b405f?w=600&q=80&fit=crop" alt="Tops collection" loading="lazy"/>
+      <div class="coll-overlay"></div>
+      <div class="coll-label">
+        <p class="coll-name">Tops</p>
+        <p class="coll-sub">SHOP NOW <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></p>
+      </div>
+    </div>
+    <div class="coll-card lift">
+      <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80&fit=crop" alt="Sets collection" loading="lazy"/>
+      <div class="coll-overlay"></div>
+      <div class="coll-label">
+        <p class="coll-name">Sets</p>
+        <p class="coll-sub">SHOP NOW <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></p>
+      </div>
+    </div>
+    <div class="coll-card lift">
+      <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80&fit=crop" alt="New In collection" loading="lazy"/>
+      <div class="coll-overlay"></div>
+      <div class="coll-label">
+        <p class="coll-name">New In</p>
+        <p class="coll-sub">SHOP NOW <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURED PRODUCTS ──────────────────────────────── -->
+<section id="products">
+  <div class="products-head">
+    <div>
+      <p class="slabel">Handpicked for You</p>
+      <h2 class="serif">Featured Pieces</h2>
+    </div>
+    <button class="btn-outline">VIEW ALL</button>
+  </div>
+  <div class="prod-grid">
+
+    <!-- Product 1 -->
+    <div class="pcard" onclick="addToCart(this)">
+      <span class="ptag">New</span>
+      <button class="pwish" onclick="toggleWish(event,this)" aria-label="Add to wishlist">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <div class="pimg">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=80&fit=crop" alt="Emerald Power Suit" loading="lazy"/>
+      </div>
+      <div class="qadd">+ ADD TO CART</div>
+      <div class="pinfo">
+        <p class="pname serif">Emerald Power Suit</p>
+        <p class="pprice">TZS 185,000</p>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="pcard" onclick="addToCart(this)">
+      <span class="ptag">Bestseller</span>
+      <button class="pwish" onclick="toggleWish(event,this)" aria-label="Add to wishlist">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <div class="pimg">
+        <img src="https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=600&q=80&fit=crop" alt="Noir Column Dress" loading="lazy"/>
+      </div>
+      <div class="qadd">+ ADD TO CART</div>
+      <div class="pinfo">
+        <p class="pname serif">Noir Column Dress</p>
+        <p class="pprice">TZS 145,000</p>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="pcard" onclick="addToCart(this)">
+      <button class="pwish" onclick="toggleWish(event,this)" aria-label="Add to wishlist">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <div class="pimg">
+        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80&fit=crop" alt="Velvet Two-Piece" loading="lazy"/>
+      </div>
+      <div class="qadd">+ ADD TO CART</div>
+      <div class="pinfo">
+        <p class="pname serif">Velvet Two-Piece</p>
+        <p class="pprice">TZS 220,000</p>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="pcard" onclick="addToCart(this)">
+      <span class="ptag">New</span>
+      <button class="pwish" onclick="toggleWish(event,this)" aria-label="Add to wishlist">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <div class="pimg">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80&fit=crop" alt="Classic Blazer Set" loading="lazy"/>
+      </div>
+      <div class="qadd">+ ADD TO CART</div>
+      <div class="pinfo">
+        <p class="pname serif">Classic Blazer Set</p>
+        <p class="pprice">TZS 260,000</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── BRAND STORY ────────────────────────────────────── -->
+<section id="story">
+  <div class="story-img">
+    <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&q=80&fit=crop" alt="Mac Couture atelier" loading="lazy"/>
+  </div>
+  <div class="story-body">
+    <p class="slabel" style="margin-bottom:12px">Our Story</p>
+    <h2 class="serif">
+      Born in Tanzania.<br/>
+      <em>Made for the World.</em>
+    </h2>
+    <div class="accent-bar"></div>
+    <p>Mac Couture was founded with a singular vision: to create fashion that honors the modern African woman — her power, her elegance, and her story. Every piece is a celebration of timeless style rooted in Tanzania's rich cultural heritage.</p>
+    <p>We source only the finest fabrics, partner with skilled Tanzanian artisans, and design silhouettes that carry you from morning meetings to evening celebrations with effortless confidence.</p>
+    <button class="btn-primary">
+      DISCOVER OUR STORY
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ───────────────────────────────────── -->
+<section id="testimonials">
+  <div class="test-head">
+    <p class="slabel">Real Women, Real Stories</p>
+    <h2 class="serif">What She Said</h2>
+    <div class="accent-bar center"></div>
+  </div>
+
+  <div id="tcard" class="tcard">
+    <div class="tstars">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#C8A96E" stroke="#C8A96E" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#C8A96E" stroke="#C8A96E" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#C8A96E" stroke="#C8A96E" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#C8A96E" stroke="#C8A96E" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#C8A96E" stroke="#C8A96E" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <p class="ttext" id="ttext">"Mac Couture pieces make me feel like I stepped straight out of a magazine. The quality is exceptional and every stitch speaks to the care behind the craft."</p>
+    <p class="tname" id="tname">Amina K.</p>
+    <p class="tloc" id="tloc">Dar es Salaam</p>
+  </div>
+
+  <div class="tdots">
+    <button class="tdot active" onclick="goTest(0)" aria-label="Testimonial 1"></button>
+    <button class="tdot" onclick="goTest(1)" aria-label="Testimonial 2"></button>
+    <button class="tdot" onclick="goTest(2)" aria-label="Testimonial 3"></button>
+    <button class="tdot" onclick="goTest(3)" aria-label="Testimonial 4"></button>
+  </div>
+  <div class="tarrows">
+    <button class="tarrow" onclick="prevTest()" aria-label="Previous testimonial">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="tarrow" onclick="nextTest()" aria-label="Next testimonial">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ─────────────────────────────────────── -->
+<section id="newsletter">
+  <div class="nl-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+  </div>
+  <p class="slabel" style="color:rgba(255,255,255,.7);margin-bottom:8px">New Here?</p>
+  <h2 class="serif">Get 10% Off Your First Order</h2>
+  <p>Join the Mac Couture family. Be first to know about new drops and exclusive events.</p>
+  <div class="nl-form" id="nl-form">
+    <input type="email" class="nl-input" id="nl-email" placeholder="Your email address" aria-label="Email address"/>
+    <button class="nl-btn" onclick="subscribe()">SIGN UP →</button>
+  </div>
+  <div class="nl-success hidden" id="nl-success">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Welcome! Your 10% code is on its way.
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer id="footer">
+  <div class="foot-logo">
+    <div class="foot-mac">MAC</div>
+    <div class="foot-couture">COUTURE</div>
+    <p class="foot-tagline">Timeless fashion crafted for the modern Tanzanian woman.</p>
+  </div>
+  <div class="foot-grid">
+    <div class="foot-col">
+      <h4>Shop</h4>
+      <a href="#" class="foot-link">New Arrivals</a>
+      <a href="#" class="foot-link">Dresses</a>
+      <a href="#" class="foot-link">Tops</a>
+      <a href="#" class="foot-link">Sets</a>
+      <a href="#" class="foot-link">Collections</a>
+    </div>
+    <div class="foot-col">
+      <h4>Help</h4>
+      <a href="#" class="foot-link">Shipping &amp; Returns</a>
+      <a href="#" class="foot-link">Size Guide</a>
+      <a href="#" class="foot-link">Privacy Policy</a>
+      <a href="#" class="foot-link">Terms of Service</a>
+      <a href="#" class="foot-link">Contact Us</a>
+    </div>
+  </div>
+  <div class="foot-divider">
+    <div class="foot-contact">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0B6B3A" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      hello@maccouture.co.tz
+    </div>
+    <div class="foot-contact">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0B6B3A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +255 700 000 000
+    </div>
+    <div class="foot-contact">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      WhatsApp us anytime
+    </div>
+  </div>
+  <div class="foot-socials">
+    <a href="#" class="foot-social" aria-label="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="#" class="foot-social" aria-label="Facebook">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+    <a href="mailto:hello@maccouture.co.tz" class="foot-social" aria-label="Email">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+  <p class="foot-copy">© 2024 Mac Couture. All Rights Reserved. Dar es Salaam, Tanzania.</p>
+</footer>
+
+<!-- ── WHATSAPP FAB ────────────────────────────────────── -->
+<a id="wa-fab" href="https://wa.me/255700000000" target="_blank" rel="noopener" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+<!-- ── BOTTOM NAV ──────────────────────────────────────── -->
+<nav id="bnav" aria-label="Main navigation">
+  <div class="bnav-inner">
+    <button class="bnav-btn active" onclick="setNav(this,'#')" aria-label="Home">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      Home
+    </button>
+    <button class="bnav-btn" onclick="setNav(this,'#collections')" aria-label="Shop">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Shop
+    </button>
+    <button class="bnav-btn" onclick="setNav(this,'#')" aria-label="Wishlist">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Wishlist
+    </button>
+    <button class="bnav-btn" onclick="setNav(this,'#')" aria-label="Account">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Account
+    </button>
+    <a class="bnav-btn" href="https://wa.me/255700000000" target="_blank" aria-label="Contact via WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Contact
+    </a>
+  </div>
+</nav>
+
+<!-- ── JAVASCRIPT ──────────────────────────────────────── -->
+<script>
+// ── HERO CAROUSEL ─────────────────────────────────────────
+const heroSlides = document.querySelectorAll('.hero-slide');
+const heroDots   = document.querySelectorAll('.hdot');
+const heroLabels = ['Timeless Style','New Season','Power Dressing'];
+const heroLines  = [['Crafted for','Confidence'],['Draped in','Elegance'],['Dress for','Every Chapter']];
+
+let heroIdx = 0, heroTimer;
+
+function goSlide(i) {
+  heroSlides[heroIdx].classList.remove('active');
+  heroDots[heroIdx].classList.remove('active');
+  heroDots[heroIdx].setAttribute('aria-selected','false');
+  heroIdx = i;
+  heroSlides[heroIdx].classList.add('active');
+  heroDots[heroIdx].classList.add('active');
+  heroDots[heroIdx].setAttribute('aria-selected','true');
+  document.getElementById('hero-label').textContent = heroLabels[i];
+  document.getElementById('hero-line1').textContent = heroLines[i][0];
+  document.getElementById('hero-line2').textContent = heroLines[i][1];
+  resetHeroTimer();
+}
+
+function nextSlide() { goSlide((heroIdx + 1) % heroSlides.length) }
+function prevSlide()  { goSlide((heroIdx - 1 + heroSlides.length) % heroSlides.length) }
+
+function resetHeroTimer() {
+  clearInterval(heroTimer);
+  heroTimer = setInterval(nextSlide, 5000);
+}
+
+resetHeroTimer();
+
+// ── TESTIMONIALS ──────────────────────────────────────────
+const tests = [
+  { text: 'Mac Couture pieces make me feel like I stepped straight out of a magazine. The quality is exceptional and every stitch speaks to the care behind the craft.', name: 'Amina K.', loc: 'Dar es Salaam' },
+  { text: 'I wore the Emerald Suit to my board meeting and received compliments all day. This brand truly understands the modern African woman.', name: 'Fatuma M.', loc: 'Nairobi' },
+  { text: 'Finally a Tanzanian brand that rivals international luxury fashion. Delivery was swift and the packaging felt genuinely premium.', name: 'Grace T.', loc: 'Arusha' },
+  { text: 'The fabric quality alone sets Mac Couture apart. Clean silhouettes, perfect fit, and a brand identity I\'m proud to wear every day.', name: 'Zara B.', loc: 'Zanzibar' },
+];
+const tDots = document.querySelectorAll('.tdot');
+let tIdx = 0;
+
+function goTest(i) {
+  const card = document.getElementById('tcard');
+  card.style.opacity = '0';
+  setTimeout(() => {
+    tDots[tIdx].classList.remove('active');
+    tIdx = i;
+    tDots[tIdx].classList.add('active');
+    document.getElementById('ttext').textContent = '"' + tests[i].text + '"';
+    document.getElementById('tname').textContent = tests[i].name;
+    document.getElementById('tloc').textContent  = tests[i].loc;
+    card.style.opacity = '1';
+  }, 220);
+}
+
+function nextTest() { goTest((tIdx + 1) % tests.length) }
+function prevTest()  { goTest((tIdx - 1 + tests.length) % tests.length) }
+
+// ── CART ──────────────────────────────────────────────────
+let cartCount = 0;
+
+function addToCart(card) {
+  if (event && event.target.closest('.pwish')) return;
+  cartCount++;
+  const badge = document.getElementById('cart-badge');
+  badge.textContent = cartCount;
+  badge.classList.remove('hidden');
+  const qadd = card.querySelector('.qadd');
+  const orig = qadd.textContent;
+  qadd.textContent = '✓ ADDED';
+  qadd.style.background = '#0D7D44';
+  setTimeout(() => { qadd.textContent = orig; qadd.style.background = ''; }, 1500);
+}
+
+function showCartMsg() {
+  if (cartCount === 0) { alert('Your bag is empty. Start shopping!'); }
+  else { alert(`You have ${cartCount} item${cartCount > 1 ? 's' : ''} in your bag.`); }
+}
+
+// ── WISHLIST ──────────────────────────────────────────────
+function toggleWish(e, btn) {
+  e.stopPropagation();
+  btn.classList.toggle('active');
+  const svg = btn.querySelector('svg');
+  if (btn.classList.contains('active')) {
+    svg.setAttribute('fill','#0B6B3A');
+    svg.setAttribute('stroke','#0B6B3A');
+  } else {
+    svg.setAttribute('fill','none');
+    svg.setAttribute('stroke','currentColor');
+  }
+}
+
+// ── MOBILE MENU ───────────────────────────────────────────
+function openMenu() {
+  document.getElementById('mmenu').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  document.getElementById('mmenu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── NEWSLETTER ────────────────────────────────────────────
+function subscribe() {
+  const email = document.getElementById('nl-email').value;
+  if (!email.includes('@')) {
+    document.getElementById('nl-email').style.borderColor = 'rgba(255,100,100,.6)';
+    return;
+  }
+  document.getElementById('nl-form').classList.add('hidden');
+  document.getElementById('nl-success').classList.remove('hidden');
+}
+
+document.getElementById('nl-email').addEventListener('keydown', e => {
+  if (e.key === 'Enter') subscribe();
+  e.target.style.borderColor = 'rgba(255,255,255,.3)';
+});
+
+// ── BOTTOM NAV ────────────────────────────────────────────
+function setNav(btn, href) {
+  document.querySelectorAll('.bnav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (href && href !== '#') {
+    const target = document.querySelector(href);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// ── SCROLL-AWARE HEADER ───────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// ── SMOOTH SCROLL HELPER ──────────────────────────────────
+function scrollTo(selector) {
+  const el = document.querySelector(selector);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
